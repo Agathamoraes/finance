@@ -137,6 +137,5 @@ nav a {
 #check:checked ~ .barra nav a .link {
     opacity: 1;
     margin-top: 0;
-
 }
-  
+
