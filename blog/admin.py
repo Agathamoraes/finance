@@ -1,4 +1,31 @@
 from django.contrib import admin
-from .models import Post
+from .models import Produto, Estoque, EstoqueItens
 
-admin.site.register(Post)
+@admin.register(Produto)
+
+class ProdutoAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__',
+        'importado',
+        'ncm',
+        'preco',
+        'estoque',
+        'estoque_minimo', 
+    )
+    search_fields=('produto',)
+    list_filter= ('importado',)
+
+class EstoqueItensInline(admin.TabularInline):
+    model = EstoqueItens
+    extra = 0
+
+
+@admin.register(Estoque)
+class EstoqueAdmin(admin.ModelAdmin):
+    inlines = (EstoqueItensInline,)
+    list_display = ('__str__', 'nf',)
+    search_fields = ('nf',)
+    list_filter = ('funcionario',)
+    date_hierarchy = 'created'
+
+    
