@@ -69,7 +69,7 @@
 				<li><a href="#"><div class = "link"><img src="{% static "img/ctapg.png" %}" width = "50"/><p>Despesa</div></a>
 					<ul>
 						<li><a href="">Contas a pagar</a></li>
-						<li><a href="">Despesas</a></li>
+						<li><a href="{% url 'blog:ent_estoque' %}">Despesas</a></li>
 						<li><a href="">Fornecedores</a></li>
 					</ul>
 				</li>
@@ -86,7 +86,7 @@
 						<li><a href="">Despesas</a></li>
 						<li><a href="">Cliente</a></li>
 						<li><a href="">Fornecedor</a></li>
-						<li><a href="">Produtos</a></li>
+						<li><a href="{% url 'blog:produto_list' %}">Produtos</a></li>
 					</ul>
 				</li>
 				<li><a href="#"><div class = "link"><img src="{% static "img/estoque.png" %}" width = "40"/><p>Estoque</div></a></li>

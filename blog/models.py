@@ -57,16 +57,18 @@ MOVIMENTO = (
     ('s', 'saida'),
 )
 
-class Estoque(TimeStampedModel):
-    funcionario = models.ForeignKey(User, on_delete= models.CASCADE)
-    nf = models.PositiveIntegerField ('Nota Fiscal', null = True, blank=True)
-    movimento = models.CharField (max_length=1, choices = MOVIMENTO)
+class Estoque (TimeStampedModel):
+    funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
+    movimento = models.CharField(max_length=1, choices=MOVIMENTO, blank=True)
 
     class meta:
         ordenring = ('-created') 
     
-    def __str__(selt):
-        return str(selt.pk)
+    def __str__(self):
+        return '{} - {} - {}'.format(self.pk, self.nf, self.created.strftime('%d-%m-%Y'))
+    def nf_formated(self):
+        return str(self.nf).zfill(3)
 
 class EstoqueItens(models.Model):
     estoque = models.ForeignKey(Estoque, on_delete=models.CASCADE)

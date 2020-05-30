@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
-from .models import Produto
+from .models import Produto, Estoque
 from .form import ProdutoForm
 
 def index(request):
@@ -32,3 +32,14 @@ class ProdutoCreate(CreateView):
     model = Produto
     template_name = 'blog/form_prod.html'
     form_class = ProdutoForm
+
+class ProdutoUpdate(UpdateView):
+    model = Produto
+    template_name = 'blog/form_prod.html'
+    form_class = ProdutoForm
+
+def ent_estoque (request):
+    template_name = 'blog/ent_estoque.html'
+    objects = Estoque.objects.filter(movimento='e')
+    context = {'object_list':objects}
+    return render (request, template_name, context) 
