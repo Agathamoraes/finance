@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse_lazy
 
 
 class Post(models.Model):
@@ -47,6 +48,10 @@ class Produto (models.Model):
     def __str__(self):
         return self.produto
 
+    def get_absolute_url(self):
+        return reverse_lazy('blog:detail_prod', kwargs={'pk': self.pk})
+
+
 MOVIMENTO = (
     ('e', 'entrada'),
     ('s', 'saida'),
@@ -74,3 +79,5 @@ class EstoqueItens(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format (self.pk, self.estoque.pk, self.produto)
+
+    

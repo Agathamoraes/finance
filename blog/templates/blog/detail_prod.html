@@ -1,0 +1,69 @@
+
+{% extends "blog/base.html" %}
+
+{% block css%} 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+
+<style>
+    #margem {margin-left: 135px;}
+    #editar {margin-left: 265;}
+    #prod {margin-left: 370;}
+</style>
+
+{% endblock css%}
+
+
+{% block content %} 
+<p></p>
+<a id= "margem" href="{% url 'blog:produto_list' %}"><h5 id="margem">Voltar</h5></a>
+<br><br>
+<h1 id= "prod"> {{object}}
+    <span class="pull-rigth">
+        <a href="">
+            <button id = "editar" type="button" class="btn btn-success">
+                <span class="fa fa-pencil"></span>Editar
+
+            </button>
+        </a>
+    </span>
+</h1>
+<br>
+
+<div id= "margem"class="col-sm-6">
+    <table class="table table-user-information">
+        <tbody>
+            <tr>
+                <th class="text-rigth">Importado</th>
+                <td>
+                    {% if object.importado %}
+                        <i class="fa fa-check-circle ok"></i>
+                    {% else%}
+                        <i class="fa fa-minus-circle no"></i>
+                    {% endif %}
+
+                </td>
+            </tr>
+            <tr>
+                <th class="text-rigth">NCM </th>
+                <td> {{object.ncm}}</td>
+            </tr>
+            <tr>
+                <th class="text-rigth">Preço </th>
+                <td> {{object.preco}}</td>
+            </tr>
+            <tr>
+                <th class="text-rigth">Estoque </th>
+                <td> {{object.estoque}}</td>
+            </tr>
+            <tr>
+                <th class="text-rigth">Estoque Mínimo </th>
+                <td> {{object.estoque_minimo}}</td>
+            </tr>
+        </tbody>    
+    </table>
+
+</div>
+{% endblock content %}

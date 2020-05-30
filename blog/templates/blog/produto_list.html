@@ -3,25 +3,38 @@
 
 {% block css%} 
 
-<link rel="shortcut icon" href="https://www.djangoproject.com/favicon.ico">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <style>
-    .page-header{
-  margin-left: 135px;}
-    .ok{
-        color: green;
-    }
-    .no{
-        color: red;
-    }
+.pull-rigth{
+    margin-left: 1075;
+}
+
+
+
 </style>
 {% endblock css%}
 {% block content %} 
 <div class="page-header">
-    <h2><i class="fa fa-user"></i>Lista de Produtos</h2> <br>
+    <h2> 
+        <span class="pull-rigth">
+            <a href="{% url 'blog:produto_add' %}">
+                <button type="button" class="btn btn-primary">
+                    <span class="fa fa-plus"></span>Adicionar
+                </button>
+            </a>
+
+
+        </span>
+
+
+    </h2>
+    
+    
+    <br>
 
     {% if object_list %}
         <table class="table table-striped">
@@ -30,9 +43,9 @@
                     <th>Importado</th>
                     <th>NCM</th>
                     <th>Produto</th>
-                    <th>Preço</th>
-                    <th classe = "text-center">Estoque</th>
-                    <th classe = "text-center">Estoque Mínimo</th>
+                    <th class = "text-center">Preço</th>
+                    <th class = "text-center">Estoque</th>
+                    <th class = "text-center">Estoque Mínimo</th>
                 </tr>
             </thead> 
             <tbody>
@@ -46,8 +59,10 @@
                             {% endif %}
                         </td>
                         <td>{{ object.ncm }}</td>
-                        <td>{{ object.produto }}</td>
-                        <td>R$ <span class="pull-right"> {{object.preco }}</span></td>
+                        <td>
+                            <a href="{{ object.get_absolute_url }}">{{ object.produto }}</a>
+                        </td>
+                        <td>R$<span class="pull-right"> {{object.preco }}</span></td>
                         <td class="text-center">{{ object.estoque }}</td>
                         <td class="text-center">{{ object.estoque_minimo }}</td>
                         
