@@ -43,3 +43,10 @@ def ent_estoque (request):
     objects = Estoque.objects.filter(movimento='e')
     context = {'object_list':objects}
     return render (request, template_name, context) 
+
+    
+def ent_estoque_detail (request, pk):
+    template_name = 'blog/ent_estoque_detail.html'
+    obj = Estoque.objects.get(pk=pk)
+    context = {'object':obj}
+    return render (request, template_name, context) 
