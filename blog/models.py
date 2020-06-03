@@ -50,7 +50,13 @@ class Produto (models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('blog:detail_prod', kwargs={'pk': self.pk})
-
+    
+    def to_dict_json(self):
+        return {
+            'pk': self.pk,
+            'produto': self.produto,
+            'estoque': self.estoque,
+        }
 
 MOVIMENTO = (
     ('e', 'entrada'),
@@ -73,6 +79,28 @@ class Estoque (TimeStampedModel):
 
     def nf_formated(self):
         return str(self.nf).zfill(3)
+
+class EstoqueEntradaManeger(models.Manager):
+    def get_queryset(self):
+        return super(EstoqueEntradaManeger, self).get_queryset().filter(movimento = 'e')
+
+class EstoqueEntrada(Estoque):
+    objects = EstoqueEntradaManeger()
+    class Meta:
+        proxy = True
+        verbose_name = 'estoque entrada'
+        verbose_name_plural = 'estoque entrada' 
+
+class EstoqueSaidaManeger(models.Manager):
+    def get_queryset(self):
+        return super(EstoqueSaidaManeger, self).get_queryset().filter(movimento = 's')
+
+class EstoqueSaida(Estoque):
+    objects = EstoqueSaidaManeger()
+    class Meta:
+        proxy = True
+        verbose_name = 'estoque saida'
+        verbose_name_plural = 'estoque saida' 
 
 class EstoqueItens(models.Model):
     estoque = models.ForeignKey(Estoque, on_delete=models.CASCADE, related_name='estoques')
