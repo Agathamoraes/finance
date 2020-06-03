@@ -3,7 +3,7 @@ from django.shortcuts import render, resolve_url
 from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
 from django.forms import inlineformset_factory
-from .models import Produto, EstoqueEntrada, EstoqueSaida, EstoqueItens
+from .models import Produto,Estoque, EstoqueEntrada, EstoqueSaida, EstoqueItens
 from .form import ProdutoForm, EstoqueForm, EstoqueItensForm
 
 def index(request):
@@ -63,7 +63,7 @@ def baixa_estoque(form):
 
 def ent_estoque_form (request):
     template_name = 'blog/ent_estoque_form.html'
-    estoque_form = EstoqueEntrada()
+    estoque_form = Estoque()
     item_estoque_formset = inlineformset_factory(
         EstoqueEntrada,
         EstoqueItens,
@@ -94,6 +94,11 @@ def produto_json(request, pk):
     data = [item.to_dict_json() for item in produto]
     return JsonResponse({'data': data})
 
+def sai_estoque_detail (request, pk):
+    template_name = 'blog/sai_estoque_detail.html'
+    obj = EstoqueSaida.objects.get(pk=pk)
+    context = {'object':obj}
+    return render (request, template_name, context) 
 
 
 def sai_estoque (request):
