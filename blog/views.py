@@ -3,7 +3,7 @@ from django.shortcuts import render, resolve_url
 from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
 from django.forms import inlineformset_factory
-from .models import Produto, Estoque, EstoqueItens
+from .models import Produto, EstoqueEntrada, EstoqueSaida, EstoqueItens
 from .form import ProdutoForm, EstoqueForm, EstoqueItensForm
 
 def index(request):
@@ -42,14 +42,13 @@ class ProdutoUpdate(UpdateView):
 
 def ent_estoque (request):
     template_name = 'blog/ent_estoque.html'
-    objects = Estoque.objects.filter(movimento='e')
+    objects = EstoqueEntrada.objects.all()
     context = {'object_list':objects}
     return render (request, template_name, context) 
-
     
 def ent_estoque_detail (request, pk):
     template_name = 'blog/ent_estoque_detail.html'
-    obj = Estoque.objects.get(pk=pk)
+    obj = EstoqueEntrada.objects.get(pk=pk)
     context = {'object':obj}
     return render (request, template_name, context) 
 
@@ -64,9 +63,9 @@ def baixa_estoque(form):
 
 def ent_estoque_form (request):
     template_name = 'blog/ent_estoque_form.html'
-    estoque_form = Estoque()
+    estoque_form = EstoqueEntrada()
     item_estoque_formset = inlineformset_factory(
-        Estoque,
+        EstoqueEntrada,
         EstoqueItens,
         form = EstoqueItensForm,
         extra = 0,
@@ -94,3 +93,12 @@ def produto_json(request, pk):
     produto = Produto.objects.filter(pk=pk)
     data = [item.to_dict_json() for item in produto]
     return JsonResponse({'data': data})
+
+
+
+def sai_estoque (request):
+    template_name = 'blog/sai_estoque.html'
+    objects = EstoqueSaida.objects.all()
+    context = {'object_list':objects}
+    return render (request, template_name, context) 
+  

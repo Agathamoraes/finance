@@ -13,4 +13,5 @@ urlpatterns = [
     path('estoque', views.ent_estoque, name='ent_estoque'),
     path('estoque/<int:pk>/', views.ent_estoque_detail, name='ent_estoque_detail'),
     path('estoque/add/', views.ent_estoque_form, name='ent_estoque_form'),
+    path('saida/', views.sai_estoque, name='sai_estoque'),
 ]
