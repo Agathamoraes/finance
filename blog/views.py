@@ -48,9 +48,9 @@ def ent_estoque (request):
     return render (request, template_name, context) 
     
 def ent_estoque_detail (request, pk):
-    template_name = 'blog/ent_estoque_detail.html'
+    template_name = 'blog/estoque_detail.html'
     obj = EstoqueEntrada.objects.get(pk=pk)
-    context = {'object':obj}
+    context = {'object':obj, 'url_list':'blog:ent_estoque',}
     return render (request, template_name, context) 
 
 def baixa_estoque(form):
@@ -104,11 +104,10 @@ def produto_json(request, pk):
     return JsonResponse({'data': data})
 
 def sai_estoque_detail (request, pk):
-    template_name = 'blog/sai_estoque_detail.html'
+    template_name = 'blog/estoque_detail.html'
     obj = EstoqueSaida.objects.get(pk=pk)
-    context = {'object':obj}
+    context = {'object':obj, 'url_list':'blog:sai_estoque'}
     return render (request, template_name, context) 
-
 
 def sai_estoque (request):
     template_name = 'blog/estoque_list.html'
