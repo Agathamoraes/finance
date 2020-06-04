@@ -9,7 +9,7 @@ class ProdutoForm(forms.ModelForm):
 class EstoqueForm(forms.ModelForm):
     class Meta:
         model = Estoque
-        fields = '__all__'
+        fields = ('funcionario', 'nf')
 
 class EstoqueItensForm(forms.ModelForm):
     class Meta:

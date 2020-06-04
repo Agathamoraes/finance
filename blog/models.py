@@ -72,10 +72,14 @@ class Estoque (TimeStampedModel):
         ordenring = ('-created') 
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.pk, self.nf, self.created.strftime('%d-%m-%Y'))
+        if self.nf:
+            return '{} - {} - {}'.format(self.pk, self.nf, self.created.strftime('%d-%m-%Y'))
+        return '{} --- {}'.format(self.pk,self.created.strftime('%d-%m-%Y'))
 
     def nf_formated(self):
-        return str(self.nf).zfill(3)
+        if self.nf:
+            return str (self.nf).zfill(3)
+        return '---'
 
 class EstoqueEntradaManeger(models.Manager):
     def get_queryset(self):
