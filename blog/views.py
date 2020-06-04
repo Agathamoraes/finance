@@ -107,3 +107,29 @@ def sai_estoque (request):
     context = {'object_list':objects}
     return render (request, template_name, context) 
   
+def sai_estoque_form (request):
+    template_name = 'blog/sai_estoque_form.html'
+    estoque_form = Estoque()
+    item_estoque_formset = inlineformset_factory(
+        EstoqueSaida,
+        EstoqueItens,
+        form = EstoqueItensForm,
+        extra = 0,
+        min_num = 1,
+        validate_min = True,
+        )
+    if request.method == 'POST':
+        form = EstoqueForm(request.POST, instance= estoque_form, prefix = 'main')
+        formset = item_estoque_formset(request.POST, instance= estoque_form, prefix= 'estoque')
+        if form.is_valid() and formset.is_valid():
+            form = form.save()
+            baixa_estoque(form)
+            formset.save()
+            url = 'blog:sai_estoque_detail'
+            return HttpResponseRedirect(resolve_url(url, form.pk)) 
+    else:
+        form = EstoqueForm(instance= estoque_form, prefix = 'main')
+        formset = item_estoque_formset(instance= estoque_form, prefix= 'estoque')
+
+    context = {'form':form, 'formset':formset}
+    return render (request, template_name, context) 
