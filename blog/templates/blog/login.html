@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="{% static 'css/blog.css' %}">
@@ -15,53 +15,47 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  
-  
-  
+   
   <style>
-  #div1 {background-color: #666;}
-	#div2 {border: 2px solid #DCDCDC;}
-	#div3 {background-color: #a2293a;}
-	#div4 {background-color: #a0a0a0;}
-	#div5 {background-color: #DCDCDC;}
-  #div6 {background-color: #A9A9A9;}
-  #div7 {background-color: black;}
-  body{        
+    #div3 {background-color: #04323F;}
+    body{        
         color: white; 
         font-weight: bold;
-        background-image: url("https://ava.pucpr.br/blackboardauth/imagem/bgLogin/curitiba.jpg");
-    
-    
-    }
-    </style>
+        background-image: url("/static/img/login1.jpg"); 
+        font-weight: bold; 
+       }
+    h3{color:#D3590F}
+    #margem {margin-left: 20px;
+             margin-right: 20px;
+             margin-bottom: 10px;}
+       
   </style>
+
 </head>
+
 <body>
 
-<div id = "div3"class="row"> <p>
+  <div id = "div1"class="row"> <p>
     <div class="col-md-12">
     </div>
-</div>
+  </div>
 
-<div class="row">
+  <div id = "div3" class="col-md-12"> <br>
+    <img src = "{% static "img/finance1.jpg" %}" width = "100" align="right">
+    <br><br><br>
+  </div>
 
-<div class="col-md-12">
-    <center><img src="{% static "img/puc1.png" %}" alt = "puc1" width = "150" align = /> </center>
-</div>
-
-</div>
-
-<br> </br>
+<br></br><br></br><br></br>
 <div class="container mt-6">  
     <form action="submit", method="POST">{% csrf_token %}
       <div class="row" style="margin-left:25%; margin-right:25%; margin-top:5%">
-          <div id = "div7" class="col-4">
-            <h3 class="text-center">Acesso ao Ambiente Virtual de Aprendizagem</h3>
-            <div class="form-group">
+          <div id = "div3" class="col-4">
+            <h3 class="text-center">Financezy</h3>
+            <div id = "margem" class="form-group">
               <label for="username">Usuário:</label>
               <input type="username" class="form-control" id="username" placeholder="E-mail" name="username" size="10">
             </div>
-            <div class="form-group">
+            <div id="margem" class="form-group">
               <label for="pwd">Senha:</label>
               <input type="password" class="form-control" id="pwd" placeholder="Senha" name="password">
             </div>
@@ -73,7 +67,7 @@
                         {% endfor %}
   
                     {% endif %}
-            <button type="submit" class="btn btn-danger">Entrar</button>
+            <button id="margem" type="submit" class="btn btn-danger">Entrar</button>
         </div>
       </div>
     </form>

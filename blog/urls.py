@@ -16,4 +16,7 @@ urlpatterns = [
     path('estoque/saida/', views.sai_estoque, name='sai_estoque'),
     path('estoque/saida/<int:pk>/', views.sai_estoque_detail, name='sai_estoque_detail'),
     path('/saida/', views.sai_estoque_form, name='sai_estoque_form'),
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user),
 ]   

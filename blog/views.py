@@ -1,11 +1,17 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import  authenticate, login, logout
+from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, resolve_url
+from django.shortcuts import render, resolve_url, redirect
 from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
 from django.forms import inlineformset_factory
+from django.views.decorators.csrf import csrf_protect
 from .models import Produto,Estoque, EstoqueEntrada, EstoqueSaida, EstoqueItens
 from .form import ProdutoForm, EstoqueForm, EstoqueItensForm
 
+
+@login_required(login_url='/login/')
 def index(request):
     #posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date') 
     #return render(request, 'blog/post_list.html', {'posts': posts})
@@ -76,7 +82,7 @@ def estoque_add(request, template_name, movimento, url):
         form = EstoqueForm(request.POST, instance= estoque_form, prefix = 'main')
         formset = item_estoque_formset(request.POST, instance= estoque_form, prefix= 'estoque')
         if form.is_valid() and formset.is_valid():
-            form = form.save()
+            form = form.save(commit=False)
             form.movimento = movimento
             form.save()
             baixa_estoque(form)
@@ -123,3 +129,23 @@ def sai_estoque_form (request):
     if context.get('pk'):
         return HttpResponseRedirect(resolve_url(url, context.get( 'pk')))
     return render (request, template_name, context) 
+
+
+def logout_user (request):
+    logout (request)
+    return redirect ('/login/')
+
+def login_user (request):
+    return render (request, 'blog/login.html')
+csrf_protect
+def submit_login (request):
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate (username = username, password = password)
+        if user is not None:
+            login (request, user)
+            return redirect ('/')
+        else:
+            messages.error (request, 'Usuário ou senha Inválido. Tente novamente')
+    return redirect ('/login/')
