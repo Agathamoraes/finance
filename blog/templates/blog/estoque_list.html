@@ -7,11 +7,13 @@
 
 <style>
 
-.pull-rigth{margin-left: 1030;}
-table{margin-left: 140px; 
-    margin-right: 350px;
+.pull-rigth{margin-left: 400;}
+table{margin-left: 140px;
     }
 h2 {margin-left: 140;}
+.table-responsive{width: 80%;
+
+}
 </style>
 {% endblock css%}
 
@@ -29,7 +31,7 @@ h2 {margin-left: 140;}
 <br>
 
 {% if object_list%}
-    <table class="table table-striped">
+    <table class="table table-responsive ">
         <thead>
             <tr>
                 <th>Item</th>
@@ -46,7 +48,7 @@ h2 {margin-left: 140;}
                 </td>
                 <td width= "100px"> {{object.nf_formated}} </td>
                 <td width= "200px"> {{object.created}} </td>
-                <td width= "100px"> {{object.funcionario.first_name}} </td>
+                <td > {{object.funcionario.first_name}} </td>
             </tr>
             {% endfor%}
         </tbody>
