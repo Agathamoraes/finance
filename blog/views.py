@@ -23,6 +23,9 @@ def post_list (request):
 def produto_list (request):
     template_name = 'blog/produto_list.html'
     objects = Produto.objects.all()
+    search =   request.GET.get('search')
+    if search:
+        objects = objects.filter(produto__icontains=search)
     context = {'object_list': objects}
     return render( request, template_name, context)
 
@@ -49,6 +52,9 @@ class ProdutoUpdate(UpdateView):
 def ent_estoque (request):
     template_name = 'blog/estoque_list.html'
     objects = EstoqueEntrada.objects.all()
+    search =   request.GET.get('search')
+    if search:
+        objects = objects.filter(nf__icontains=search)
     context = {'object_list':objects,'titulo':'Entrada','url_add':'blog:ent_estoque_form'}
 
     return render (request, template_name, context) 
@@ -119,6 +125,9 @@ def sai_estoque_detail (request, pk):
 def sai_estoque (request):
     template_name = 'blog/estoque_list.html'
     objects = EstoqueSaida.objects.all()
+    search =   request.GET.get('search')
+    if search:
+        objects = objects.filter(nf__icontains=search)
     context = {'object_list':objects, 'titulo':'Saída', 'url_add':'blog:sai_estoque_form'}
     return render (request, template_name, context) 
   
@@ -153,6 +162,9 @@ def submit_login (request):
 def parceiro_list (request):
     template_name = 'blog/parceiro_list.html'
     objects = Parceiro.objects.all()
+    search =   request.GET.get('search')
+    if search:
+        objects = objects.filter(parceiro__icontains=search)
     context = {'object_lista': objects}
     return render( request, template_name, context)
 
