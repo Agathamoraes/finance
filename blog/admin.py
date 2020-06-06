@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Produto, EstoqueEntrada, EstoqueSaida, EstoqueItens
+from .models import Produto, EstoqueEntrada, EstoqueSaida, EstoqueItens, Parceiro
 
 @admin.register(Produto)
-
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
@@ -36,3 +35,10 @@ class EstoqueSaidaAdmin(admin.ModelAdmin):
     list_filter = ('funcionario',)
     date_hierarchy = 'created'
     
+
+@admin.register(Parceiro)
+class ParceiroAdmin(admin.ModelAdmin):
+    list_display = (
+        '__str__', 'contato', 'telefone', 'estado', 'tipo_parceiro'
+    )
+    search_fields=('parceiro',)

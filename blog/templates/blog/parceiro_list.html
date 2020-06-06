@@ -1,0 +1,75 @@
+
+{% extends "blog/base.html" %}
+
+{% block css%} 
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+<style>
+
+.pull-rigth{margin-left: 880px;}
+.btn--red:hover {background: #04323F;color:white;}
+.btn--red {background: #D3590F;}
+
+</style>
+{% endblock css%}
+{% block content %} 
+<div class="page-header">
+    
+<span class="pull-rigth">
+    <a href="{% url 'blog:parceiro_add' %}">
+        <button type="button" class="btn btn--red">
+            <span class="fa fa-plus"></span> Adicionar
+        </button>
+    </a>
+</span>
+ 
+    <br>
+
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+            <div class="card-heading">
+                <h2 class="title">
+                    <img src="{% static "img/cliente.png" %}" alt = "cliente" width = "30"/>
+                    Parceiro de Negócio</h2>
+            </div>
+
+            {% if object_lista %}
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>Contato</th>
+                        <th>Telefone</th>
+                        <th>UF</th>
+                        <th>Tipo Parceiro</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    {% for object_par in object_lista%}
+                        <tr>
+                            <td>
+                                <a href="{{ object_par.get_absolute_url }}">{{ object_par.parceiro }}</a>
+                            </td>
+                            <td>{{ object_par.cnpj}}</td>
+                            <td>{{object_par.contato }}</td>
+                            <td class="text-center">{{ object_par.telefone }}</td>
+                            <td class="text-center">{{ object_par.estado }}</td>
+                            <td class="text-center">{{ object_par.tipo_parceiro }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="alert alert-warning">Sem itens na lista</p>
+            {% endif%}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

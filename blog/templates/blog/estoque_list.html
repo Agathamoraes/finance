@@ -1,60 +1,69 @@
 {% extends "blog/base.html" %}
 
-{% block css%} 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+{% block css%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <style>
 
-.pull-rigth{margin-left: 400;}
-table{margin-left: 140px;
-    }
-h2 {margin-left: 140;}
-.table-responsive{width: 80%;
-
+.table-responsive{width: 80%;}
+.pull-rigth{margin-left: 1100px;}
+.btn-primary:hover {background: #04323F;}
+.btn-primary {background: #D3590F;
 }
+
 </style>
 {% endblock css%}
 
 {% block content %} 
 <br>
-<h2> Estoque {{titulo}}
-    <span class="pull-rigth">
-        <a href="{% url url_add%}">
-            <button type="button" class="btn btn-primary">
-                <span class="fa fa-plus"></span>Adicionar
-            </button>
-        </a>
-    </span>
-</h2>
-<br>
+<span class="pull-rigth">
+    <a href="{% url url_add%}">
+        <button type="button" class="btn btn-primary">
+            <span class="fa fa-plus"></span>Adicionar
+        </button>
+    </a>
+</span>
 
-{% if object_list%}
-    <table class="table table-responsive ">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>NF</th>
-                <th>Data</th>
-                <th>Funcionário</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list %}
-            <tr>
-                <td width= "200px">
-                    <a href= "{{ object.get_absolute_url }}">{{object}}</a>
-                </td>
-                <td width= "100px"> {{object.nf_formated}} </td>
-                <td width= "200px"> {{object.created}} </td>
-                <td > {{object.funcionario.first_name}} </td>
-            </tr>
-            {% endfor%}
-        </tbody>
-    </table>
-{% else %}
-    <p class="alert alert-warning">Sem Itens na Lista</p>
-{% endif %}
-
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card card-5" style="width: 940;">
+            <div class="card-heading">
+                <h2 class="title">
+                    <img src="{% static "img/fornec.png" %}" alt = "estoque" width = "30"/>
+                    Estoque {{titulo}}</h2>
+            </div>
+            {% if object_list%}
+            <table class="table table-responsive ">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>NF</th>
+                        <th>Data</th>
+                        <th>Usuário</th>
+                        <th>Parceiro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <td width= "200px">
+                            <a href= "{{ object.get_absolute_url }}">{{object}}</a>
+                        </td>
+                        <td width= "100px"> {{object.nf_formated}} </td>
+                        <td width= "300px"> {{object.created}} </td>
+                        <td > {{object.funcionario.first_name}} </td>
+                        <td > {{object.parceiro}} </td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="alert alert-warning">Sem Itens na Lista</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}

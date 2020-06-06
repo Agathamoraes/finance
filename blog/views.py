@@ -7,8 +7,8 @@ from django.views.generic import CreateView, UpdateView
 from django.utils import timezone
 from django.forms import inlineformset_factory
 from django.views.decorators.csrf import csrf_protect
-from .models import Produto,Estoque, EstoqueEntrada, EstoqueSaida, EstoqueItens
-from .form import ProdutoForm, EstoqueForm, EstoqueItensForm
+from .models import Produto,Estoque, EstoqueEntrada, EstoqueSaida, EstoqueItens, Parceiro
+from .form import ProdutoForm, EstoqueForm, EstoqueItensForm, ParceiroForm
 
 
 @login_required(login_url='/login/')
@@ -83,6 +83,7 @@ def estoque_add(request, template_name, movimento, url):
         formset = item_estoque_formset(request.POST, instance= estoque_form, prefix= 'estoque')
         if form.is_valid() and formset.is_valid():
             form = form.save(commit=False)
+            form.funcionario = request.user
             form.movimento = movimento
             form.save()
             baixa_estoque(form)
@@ -130,7 +131,6 @@ def sai_estoque_form (request):
         return HttpResponseRedirect(resolve_url(url, context.get( 'pk')))
     return render (request, template_name, context) 
 
-
 def logout_user (request):
     logout (request)
     return redirect ('/login/')
@@ -149,3 +149,29 @@ def submit_login (request):
         else:
             messages.error (request, 'Usuário ou senha Inválido. Tente novamente')
     return redirect ('/login/')
+
+def parceiro_list (request):
+    template_name = 'blog/parceiro_list.html'
+    objects = Parceiro.objects.all()
+    context = {'object_lista': objects}
+    return render( request, template_name, context)
+
+def parceiro_detail (request, pk):
+    template_name = 'blog/parceiro_detail.html'
+    objec = Parceiro.objects.get(pk=pk)
+    context = {'object_par': objec}
+    return render( request, template_name, context)
+
+def parceiro_add(request):
+    template_name= 'blog/parceiro_form.html'
+    return render (request, template_name)
+
+class ParceiroCreate(CreateView):
+    model = Parceiro
+    template_name = 'blog/parceiro_form.html'
+    form_class = ParceiroForm
+
+class ParceiroUpdate(UpdateView):
+    model = Parceiro
+    template_name = 'blog/parceiro_form.html'
+    form_class = ParceiroForm

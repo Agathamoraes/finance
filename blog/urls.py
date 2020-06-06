@@ -15,8 +15,16 @@ urlpatterns = [
     path('estoque/add/', views.ent_estoque_form, name='ent_estoque_form'),
     path('estoque/saida/', views.sai_estoque, name='sai_estoque'),
     path('estoque/saida/<int:pk>/', views.sai_estoque_detail, name='sai_estoque_detail'),
-    path('/saida/', views.sai_estoque_form, name='sai_estoque_form'),
+    path('saida/', views.sai_estoque_form, name='sai_estoque_form'),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
+
+    path('parceiro/', views.parceiro_list, name='parceiro_list'),
+    path('parceiro/<int:pk>/', views.parceiro_detail, name='parceiro_detail'),
+    path('parceiro/add/', views.ParceiroCreate.as_view(), name='parceiro_add'),
+    path('parceiro/<int:pk>/edit/', views.ParceiroUpdate.as_view(), name='parceiro_edit'),
+
+
+
 ]   

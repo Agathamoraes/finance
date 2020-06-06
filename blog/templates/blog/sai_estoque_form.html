@@ -3,6 +3,9 @@
 {% load bootstrap%}
 {% load static %}
 {% block css%} 
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <style>
     #margem {margin-left: 135px;}
@@ -19,15 +22,13 @@
     .form-control{
         margin: 10px;
     } 
-
+    .btn{width: 100px;}
 </style>
 {% endblock css%}
 
 {% block content %} 
 
-<p></p>
-<a id= "margem" href="{% url 'blog:ent_estoque' %}"><h5 id="margem">Voltar</h5></a>
-
+<p></p><br>
 <div class="row">
     <div class="col-sm-12">
         <form method="POST" novalidate>

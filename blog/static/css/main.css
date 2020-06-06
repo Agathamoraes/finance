@@ -299,6 +299,9 @@ h6 {
   margin: 0 auto;
 }
 
+.wrapper--w940 {
+  max-width: 940px;}
+
 .wrapper--w790 {
   max-width: 790px;
 }
@@ -314,7 +317,7 @@ h6 {
 .btn {
   display: inline-block;
   line-height: 30px;
-  padding: 0 50px;
+  padding: 0 0px;
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
@@ -422,7 +425,7 @@ input[type="date" i] {
 /* ==========================================================================
    #FORM
    ========================================================================== */
-input {
+label {
   outline: none;
   margin: 0;
   border: none;
@@ -509,7 +512,7 @@ input {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: 0 px;
   font-size: 15px;
   color: #555;
 }

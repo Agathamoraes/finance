@@ -142,3 +142,10 @@ nav a {
     margin-top: 0;
 }
 
+.btn--adicionar {
+  background: #04323F;
+}
+
+.btn--adicionar:hover {
+  background: #D3590F;
+}

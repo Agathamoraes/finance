@@ -45,3 +45,4 @@ ProdutoClass.criar_produtos(produtos)
 toc = timeit.default_timer()
 
 print('Tempo:' , toc, tic)
+

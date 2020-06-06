@@ -5,6 +5,67 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 
 
+TIPOPARCEIRO = (
+    ('Fornecedor', 'Fornecedor'),
+    ('Cliente', 'Cliente'),
+    ('Funcionário', 'Funcionário'),
+    )
+ESTADO = (
+           ('AC', 'Acre'),
+           ('AL', 'Alagoas'),
+           ('AP', 'Amapá'),
+           ('AM', 'Amazonas'),
+           ('BA', 'Bahia'),
+           ('CE', 'Ceará'),
+           ('DF', 'Distrito Federal'),
+           ('ES', 'Espírito Santo'),
+           ('GO', 'Goiás'),
+           ('MA', 'Maranhão'),
+           ('MT', 'Mato Grosso'),
+           ('MS', 'Mato Grosso do Sul'),
+           ('MG', 'Minas Gerais'),
+           ('PA', 'Pará'),
+           ('PB', 'Paraíba'),
+           ('PR', 'Paraná'),
+           ('PE', 'Pernambuco'),
+           ('PI', 'Piauí'),
+           ('RJ', 'Rio de Janeiro'),
+           ('RS', 'Rio Grande do Sul'),
+           ('RO', 'Rondônia'),
+           ('RR', 'Roraima'),
+           ('SC', 'Santa Catarina'),
+           ('SP', 'São Paulo'),
+           ('SE', 'Sergipe'),
+           ('TO', 'Tocantins'),
+           )
+class Parceiro (models.Model):
+    parceiro_ativo = models.BooleanField()
+    parceiro = models.CharField(max_length=100)
+    tipo_parceiro = models.CharField(max_length=50, choices=TIPOPARCEIRO)
+    cnpj = models.CharField(max_length=14)
+    inscricao_estadual = models.CharField(max_length=50)
+    rua = models.CharField(max_length=300)
+    numero = models.CharField(max_length=9)
+    cep = models.CharField(max_length=9)
+    bairro = models.CharField(max_length=60)
+    cidade = models.CharField(max_length=60)
+    estado = models.CharField(max_length=15, choices=ESTADO)
+    contato = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=11)
+    email = models.EmailField(max_length=300)
+    observacao = models.TextField()
+    
+
+    class meta:
+        ordering= ('Parceiro',)
+    
+    def __str__(self):
+        return self.parceiro
+
+    def get_absolute_url(self):
+        return reverse_lazy('blog:parceiro_detail', kwargs={'pk': self.pk})
+
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -34,6 +95,10 @@ class TimeStampedModel (models.Model):
     class Meta:
         abstract = True
 
+TIPOPRODUTO = (
+    ('Produto Acabado','Produto Acabado'),
+    ('Matéria Prima','Matéria Prima'),
+)
 class Produto (models.Model):
     importado = models.BooleanField(default=False)
     ncm = models.CharField('NCM', max_length=8)
@@ -41,6 +106,7 @@ class Produto (models.Model):
     preco = models.DecimalField ('Preço', max_digits=7, decimal_places=2)
     estoque = models.IntegerField('Estoque Atual')
     estoque_minimo = models.PositiveIntegerField('Estoque Minímo', default=0)
+    tipo_produto = models.CharField(max_length=30, choices=TIPOPRODUTO)
 
     class meta:
         ordering= ('Produto')
@@ -67,6 +133,7 @@ class Estoque (TimeStampedModel):
     funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
     movimento = models.CharField(max_length=1, choices=MOVIMENTO, blank=True)
+    parceiro = models.ForeignKey(Parceiro, on_delete=models.CASCADE)
 
     class meta:
         ordenring = ('-created') 
@@ -94,7 +161,6 @@ class EstoqueEntrada(Estoque):
     def get_absolute_url(self):
         return reverse_lazy('blog:ent_estoque_detail', kwargs={'pk': self.pk})
 
-
 class EstoqueSaidaManeger(models.Manager):
     def get_queryset(self):
         return super(EstoqueSaidaManeger, self).get_queryset().filter(movimento = 's')
@@ -108,7 +174,6 @@ class EstoqueSaida(Estoque):
     
     def get_absolute_url(self):
         return reverse_lazy('blog:sai_estoque_detail', kwargs={'pk': self.pk})
-
 
 class EstoqueItens(models.Model):
     estoque = models.ForeignKey(Estoque, on_delete=models.CASCADE, related_name='estoques')

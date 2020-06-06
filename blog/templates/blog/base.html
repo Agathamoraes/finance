@@ -1,11 +1,15 @@
+
 {% load static %}
 <html>
 <head>
+
     <meta charset="utf-8">
     <title>Financezy</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="shortcut icon" type="image/jpeg" href="{% static "img/logo1.jpeg" %}"/>
+
     <style>
         body{background-color: #7D979D;}
         nav {
@@ -23,6 +27,7 @@
     </style>
     {% block css%} {% endblock css%}
 </head>
+
 <body>
     <div class="container-fluid">
         <div id = "div1" class="row"><p></p>
@@ -68,8 +73,7 @@
 				</li>
 				<li><a href="#"><div class = "link"><img src="{% static "img/rel1.png" %}" width = "40"/><p>Cadastro</div></a>
 					<ul>
-						<li><a href="">Cliente</a></li>
-						<li><a href="">Fornecedor</a></li>
+						<li><a href="{% url 'blog:parceiro_list' %}">Parceiro</a></li>
 						<li><a href="{% url 'blog:produto_add' %}">Produtos</a></li>
 					</ul>
 				</li>
