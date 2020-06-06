@@ -700,3 +700,15 @@ label {
     padding-bottom: 50px;
   }
 }
+
+/*alinhamento botões*/
+.list-div{padding: 0px;}
+
+.add-div{
+  cursor: pointer;
+  display: inline-block;
+}
+
+.search-div{
+  display: inline-block;
+}

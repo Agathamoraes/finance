@@ -10,23 +10,20 @@
 <style>
 
 .table-responsive{width: 80%;}
-.pull-rigth{margin-left: 1100px;}
 .btn-primary:hover {background: #04323F;}
 .btn-primary {background: #D3590F;}
-.btn--OK:hover {background: #04323F;color:white;}
-.btn--OK {background: #D3590F;height: 33px; width: 33px;padding-left: 0px;padding-right: 0px;}
-#search{width: 200px;}
-
+.btn--OK:hover {background: #d3590f;color:white;}
+.btn--OK {background: #04323f;height: 33px; width: 33px;padding-left: 0px;padding-right: 0px;}
+#search{width: 400px;}
+#botao {display: inline-block}
+#margem{margin-left:280px ;}
 </style>
 {% endblock css%}
 
 {% block content %} 
 <br>
-
-<div class="col-sm-12" >
-    
-    <div class="col-sm-2"></div>
-    <div class="col-sm-3" >
+<div id="margem" class="offset-1 col-12 list-div">
+    <div id="botao" class="col-8">
         <form method="GET" class="form-inline" >
             <input type="text" id="search" name = "search" class="form-control" placeholder="Busca" >
             <button type="submit" class="btn btn--OK" id value="OK">
@@ -34,16 +31,17 @@
             </button>
         </form>
     </div>
-    <div class="col-sm-4"></div>
-    <div class="col-sm-3">
+    <div id="botao" class="col-3" ></div>
+    <div id="botao" class="col-1" >
         <span class="">
             <a href="{% url url_add%}">
                 <button type="button" class="btn btn-primary">
-                    <span class="fa fa-plus"></span>Adicionar
+                    <span class="fa fa-plus"></span> Adicionar
                 </button>
             </a>
         </span>
     </div>
+</div>
 
 <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
     <div class="wrapper wrapper--w790">
