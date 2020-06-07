@@ -60,9 +60,9 @@
             </div>
         </div>
     </div>	
-    <div >
-		<input type="checkbox" id= "check">
-		<label id = "icone" for= "check"> <img src = "{% static "img/icone.png" %}"> </label>
+    <div>
+		<input type="checkbox" id= "check" >
+		<label id = "icone" for= "check" style="width:70px;"> <img src = "{% static "img/icone.png" %}"> </label>
 		<div class="barra">
 			<nav>
 				<ul>
@@ -80,7 +80,7 @@
 				<li><a href="{% url 'blog:produto_list' %}"><div class = "link"><img src="{% static "img/estoque.png" %}" width = "40"/><p>Estoque</div></a></li>
 				</ul>
 			</nav>
-			</div>
+		</div>
     </div>	
     {% block content %} {% endblock content %}
 
