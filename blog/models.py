@@ -39,28 +39,26 @@ ESTADO = (
            ('TO', 'Tocantins'),
            )
 class Parceiro (models.Model):
-    parceiro_ativo = models.BooleanField()
     parceiro = models.CharField(max_length=100)
-    tipo_parceiro = models.CharField(max_length=50, choices=TIPOPARCEIRO)
     cnpj = models.CharField(max_length=14)
     inscricao_estadual = models.CharField(max_length=50)
+    contato = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=11)
+    email = models.EmailField(max_length=300)
     rua = models.CharField(max_length=300)
     numero = models.CharField(max_length=9)
     cep = models.CharField(max_length=9)
     bairro = models.CharField(max_length=60)
     cidade = models.CharField(max_length=60)
     estado = models.CharField(max_length=15, choices=ESTADO)
-    contato = models.CharField(max_length=100)
-    telefone = models.CharField(max_length=11)
-    email = models.EmailField(max_length=300)
+    tipo_parceiro = models.CharField(max_length=50, choices=TIPOPARCEIRO)
     observacao = models.TextField()
     
-
     class meta:
-        ordering= ('Parceiro',)
+        ordering= ('pk',)
     
     def __str__(self):
-        return self.parceiro
+        return str(self.pk)
 
     def get_absolute_url(self):
         return reverse_lazy('blog:parceiro_detail', kwargs={'pk': self.pk})
@@ -102,17 +100,17 @@ TIPOPRODUTO = (
 class Produto (models.Model):
     importado = models.BooleanField(default=False)
     ncm = models.CharField('NCM', max_length=8)
-    produto = models.CharField(max_length=100, unique=True)
+    produto = models.CharField(max_length=100)
     preco = models.DecimalField ('Preço', max_digits=7, decimal_places=2)
     estoque = models.IntegerField('Estoque Atual')
     estoque_minimo = models.PositiveIntegerField('Estoque Minímo', default=0)
-    tipo_produto = models.CharField(max_length=30, choices=TIPOPRODUTO)
+    tipo_produto = models.CharField(max_length=30, choices=TIPOPRODUTO, blank=True)
 
     class meta:
-        ordering= ('Produto')
+        ordering= ('pk')
 
     def __str__(self):
-        return self.produto
+        return str(self.pk)
 
     def get_absolute_url(self):
         return reverse_lazy('blog:detail_prod', kwargs={'pk': self.pk})
@@ -133,7 +131,7 @@ class Estoque (TimeStampedModel):
     funcionario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
     movimento = models.CharField(max_length=1, choices=MOVIMENTO, blank=True)
-    parceiro = models.ForeignKey(Parceiro, on_delete=models.CASCADE)
+    parceiro = models.ForeignKey(Parceiro, on_delete=models.CASCADE, )
 
     class meta:
         ordenring = ('-created') 

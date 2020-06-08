@@ -45,9 +45,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Importado</th>
-                            <th>NCM</th>
-                            <th>Produto</th>
+                            <th class = "text-center" >Importado</th>
+                            <th class = "text-center" >NCM</th>
+                            <th class = "text-center" >Produto</th>
                             <th class = "text-center">Preço</th>
                             <th class = "text-center">Estoque</th>
                             <th class = "text-center">Estoque Mínimo</th>
@@ -56,18 +56,18 @@
                     <tbody>
                         {% for object in object_list%}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if object.importado %}
-                                        <i class="fa fa-check-circle ok"></i>
-                                    {% else%}
-                                        <i class="fa fa-minus-circle no"></i>
-                                    {% endif %}
+                                    <i class="fa fa-check-circle ok"></i>
+                                  {% else %}
+                                    <i class="fa fa-minus-circle no"></i>
+                                  {% endif %}
                                 </td>
-                                <td>{{ object.ncm }}</td>
-                                <td>
+                                <td class = "text-center">{{ object.ncm }}</td>
+                                <td class = "text-center">
                                     <a href="{{ object.get_absolute_url }}">{{ object.produto }}</a>
                                 </td>
-                                <td>R$<span class="pull-right"> {{object.preco }}</span></td>
+                                <td >R$<span class="pull-right"> {{object.preco }}</span></td>
                                 <td class="text-center">{{ object.estoque }}</td>
                                 <td class="text-center">{{ object.estoque_minimo }}</td>
                             </tr>

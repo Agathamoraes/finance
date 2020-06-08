@@ -1,14 +1,19 @@
 {% extends "blog/base.html" %}
-{% load widget_tweaks %}
+{% load bootstrap%}
 {% block css%} 
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
 <style>
     span.required:after{
         content: "*";
         color: red;
     }
     form{
-        margin-left: 350px;
-        margin-right: 350px;
+        margin-left: 100px;
+        margin-right: 100px;
     }
     
 </style>
@@ -16,27 +21,25 @@
 
 
 {% block content %} 
-<br><br>
-<form method="POST" novalidate>
-    {% csrf_token %}
-    {% for field in form.visible_fields %}
-      <div class="form-group{% if field.errors %} has-error {% endif%}">
-        <label for="{{ field.id_for_label }}">
-          {% if field.field.required %}
-            <span class="required">{{ field.label }} </span>
-          {% else %}
-            {{ field.label }}
-          {% endif %}
-        </label>
-        {% render_field field class="form-control" %}
-        {% for error in field.errors %}
-          <span class="text-muted">{{ error }}</span>
-        {% endfor %}
-      </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-success">Cadastrar</button>
-  </form>
 
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+  <div class="wrapper wrapper--w790">
+      <div class="card card-5">
+          <div class="card-heading">
+              <h2 class="title">
+                  <img src="{% static "img/contato.png" %}" alt = "cliente" width = "30"/>
+                  Cadastrar Produto
+              </h2>
+          </div>
+          <form method="POST" novalidate>{% csrf_token %}
+            {{form|bootstrap}}
+            {{formset.management_form}}
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <p style="color: honeydew;">ok</p>
+          </form>
+      </div>
+  </div>
+</div>
 {% endblock content %}
 
 {% block js %}

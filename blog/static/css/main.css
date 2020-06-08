@@ -323,9 +323,8 @@ h6 {
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
   cursor: pointer;
-  font-size: 15px;
-  text-transform: uppercase;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 400;
   color: #fff;
   font-family: inherit;
 }

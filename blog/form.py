@@ -14,7 +14,7 @@ class ParceiroForm(forms.ModelForm):
 class EstoqueForm(forms.ModelForm):
     class Meta:
         model = Estoque
-        fields = ('nf','parceiro')
+        fields = ('nf','parceiro',)
 
 class EstoqueItensForm(forms.ModelForm):
     class Meta:

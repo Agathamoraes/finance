@@ -31,13 +31,30 @@ def produto_list (request):
 
 def detail_prod (request, pk):
     template_name = 'blog/detail_prod.html'
-    obj = Produto.objects.get(pk=pk)
-    context = {'object': obj}
+    codigoP = Produto.objects.get(pk=pk)
+    context = {'object': codigoP}
     return render( request, template_name, context)
 
 def produto_add(request):
     template_name= 'blog/form_prod.html'
     return render (request, template_name)
+
+def produto_submit(request):
+    importado = request.POST.get('importado')
+    ncm = request.POST.get('ncm')
+    produto = request.POST.get('produto')
+    preco = request.POST.get('preco')
+    estoque = request.POST.get('estoque')
+    estoque_minimo = request.POST.get('estoque_minimo')
+    tipo_produto = request.POST.get('tipo_parceiro')
+    codigoP = request.POST.get('cod')
+    prod = Produto.objects.create( importado=importado, ncm=ncm, produto=produto,preco=preco,
+    estoque=estoque, estoque_minimo=estoque_minimo, tipo_produto=tipo_produto,)
+    url = '/'
+    return redirect(url)
+
+
+
 
 class ProdutoCreate(CreateView):
     model = Produto
@@ -170,13 +187,13 @@ def parceiro_list (request):
 
 def parceiro_detail (request, pk):
     template_name = 'blog/parceiro_detail.html'
-    objec = Parceiro.objects.get(pk=pk)
-    context = {'object_par': objec}
+    codigo = Parceiro.objects.get(pk=pk)
+    context = {'object_par': codigo}
     return render( request, template_name, context)
 
 def parceiro_add(request):
-    template_name= 'blog/parceiro_form.html'
-    return render (request, template_name)
+    template_name = 'blog/parceiro_form.html'
+    return render(request, template_name)
 
 class ParceiroCreate(CreateView):
     model = Parceiro

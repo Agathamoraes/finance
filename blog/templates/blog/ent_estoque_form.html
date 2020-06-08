@@ -1,16 +1,15 @@
 {% extends "blog/base.html" %}
-{% load widget_tweaks %}
 {% load bootstrap%}
-{% load static %}
+
 {% block css%} 
+{% load static %}
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <style>
-    #margem {margin-left: 135px;}
-    #editar {margin-left: 265;}
-    #prod {margin-left: 370;}
+
     span.required:after{
         content: "*";
         color: red;
@@ -21,7 +20,7 @@
     }
     .form-control{margin: 10px;} 
 
-    .btn{width: 100px;}
+
     
 </style>
 {% endblock css%}
@@ -37,21 +36,7 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    {% for field in form.visible_fields %}
-                    <div class="form-group{% if field.errors %} has-error {% endif%}">
-                        <label for="{{ field.id_for_label }}">
-                        {% if field.field.required %}
-                            <span class="required">{{ field.label }} </span>
-                        {% else %}
-                            {{ field.label }}
-                        {% endif %}
-                        </label>
-                        {% render_field field class="form-control" %}
-                        {% for error in field.errors %}
-                        <span class="text-muted">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
+                    {{form|bootstrap}}
                 {{formset.management_form}}
                 </div>              
             </div>

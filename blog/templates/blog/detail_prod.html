@@ -41,20 +41,19 @@
     <div class="wrapper wrapper--w790">
         <div class="card card-5">
             <div class="card-heading">
-                <h1 class="title"> {{object}}</h1>
+                <h1 class="title"> {{object.produto}}</h1>
             </div>
             
                 <table class="table table-user-information">
                     <tbody>
                         <tr>
-                            <th class="text-rigth">Importado</th>
+                            <th class="text-rigth">Origem</th>
                             <td>
                                 {% if object.importado %}
-                                    <i class="fa fa-check-circle ok"></i>
-                                {% else%}
-                                    <i class="fa fa-minus-circle no"></i>
-                                {% endif %}
-            
+                                <i class="fa fa-check-circle ok"></i>
+                              {% else %}
+                                <i class="fa fa-minus-circle no"></i>
+                              {% endif %}
                             </td>
                         </tr>
                         <tr>

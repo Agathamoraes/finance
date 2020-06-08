@@ -8,6 +8,10 @@ urlpatterns = [
     path('produto', views.produto_list, name='produto_list'),
     path('produto/<int:pk>/', views.detail_prod, name='detail_prod'),
     path('add/', views.ProdutoCreate.as_view(), name='produto_add'),
+    path('add/submit', views.produto_submit, name='produto_submit'),
+    path('<int:pk>/edit/submit', views.detail_prod, name='detail_prod'),
+    
+
     path('<int:pk>/edit/', views.ProdutoUpdate.as_view(), name='produto_edit'),
     path('<int:pk>/json/', views.produto_json, name='produto_json'),
     path('estoque', views.ent_estoque, name='ent_estoque'),
