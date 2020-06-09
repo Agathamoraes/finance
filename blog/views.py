@@ -53,9 +53,6 @@ def produto_submit(request):
     url = '/'
     return redirect(url)
 
-
-
-
 class ProdutoCreate(CreateView):
     model = Produto
     template_name = 'blog/form_prod.html'
@@ -82,14 +79,14 @@ def ent_estoque_detail (request, pk):
     context = {'object':obj, 'url_list':'blog:ent_estoque',}
     return render (request, template_name, context) 
 
-def baixa_estoque(form):
-    #pega produto a partir da estancia do formulario
+def dar_baixa_estoque(form):
+    # Pega os produtos a partir da instância do formulário (Estoque).
     produtos = form.estoques.all()
     for item in produtos:
-        produto = Produto.objects.get(pk = item.produto.pk)
+        produto = Produto.objects.get(pk=item.produto.pk)
         produto.estoque = item.saldo
         produto.save()
-    print('Estoque atualizado com sucesso')
+    print('Estoque atualizado com sucesso.')
 
 def estoque_add(request, template_name, movimento, url):
     estoque_form = Estoque()
@@ -98,6 +95,7 @@ def estoque_add(request, template_name, movimento, url):
     EstoqueItens,
     form = EstoqueItensForm,
     extra = 0,
+    can_delete = False,
     min_num = 1,
     validate_min = True,
     )
@@ -109,8 +107,8 @@ def estoque_add(request, template_name, movimento, url):
             form.funcionario = request.user
             form.movimento = movimento
             form.save()
-            baixa_estoque(form)
             formset.save()
+            dar_baixa_estoque(form)
             return {'pk': form.pk}
     else:
         form = EstoqueForm(instance= estoque_form, prefix = 'main')

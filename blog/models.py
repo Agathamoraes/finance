@@ -55,10 +55,10 @@ class Parceiro (models.Model):
     observacao = models.TextField()
     
     class meta:
-        ordering= ('pk',)
+        ordering= ('parceiro',)
     
     def __str__(self):
-        return str(self.pk)
+        return str(self.parceiro)
 
     def get_absolute_url(self):
         return reverse_lazy('blog:parceiro_detail', kwargs={'pk': self.pk})
@@ -102,15 +102,15 @@ class Produto (models.Model):
     ncm = models.CharField('NCM', max_length=8)
     produto = models.CharField(max_length=100)
     preco = models.DecimalField ('Preço', max_digits=7, decimal_places=2)
-    estoque = models.IntegerField('Estoque Atual')
+    estoque = models.IntegerField('estoque atual')
     estoque_minimo = models.PositiveIntegerField('Estoque Minímo', default=0)
     tipo_produto = models.CharField(max_length=30, choices=TIPOPRODUTO, blank=True)
 
     class meta:
-        ordering= ('pk')
+        ordering= ('produto')
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.produto)
 
     def get_absolute_url(self):
         return reverse_lazy('blog:detail_prod', kwargs={'pk': self.pk})
@@ -177,7 +177,7 @@ class EstoqueItens(models.Model):
     estoque = models.ForeignKey(Estoque, on_delete=models.CASCADE, related_name='estoques')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
-    saldo = models.PositiveIntegerField()
+    saldo = models.PositiveIntegerField(blank=True)
 
     class Meta:
         ordering=('pk',)
